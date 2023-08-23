@@ -1,10 +1,15 @@
 import random
+import tkinter as tk
 
 mode = input("Would you like a timed run or a customizable run?\n")
 mode = mode.lower()
 amount = 0
 range2 = 0
 range1 = 0
+
+window = tk.Tk()
+window.tk.label(text="Guessing Game")
+window.mainloop()
 
 if mode == "customizable" or mode == "custom":
     def game_input():
