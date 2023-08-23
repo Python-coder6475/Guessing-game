@@ -9,6 +9,7 @@ range1 = 0
 
 window = tk.Tk()
 window.tk.label(text="Guessing Game")
+window.pack()
 window.mainloop()
 
 if mode == "customizable" or mode == "custom":
