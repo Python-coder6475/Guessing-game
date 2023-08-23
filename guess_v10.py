@@ -74,5 +74,5 @@ if mode == "customizable" or mode == "custom":
                 check_num()
                 print("Better luck next time!")
                 print("The number was ", rand2, ".")
-elif mode == "timed" or mode == "timer":
+elif "time" in mode:
     quit()
