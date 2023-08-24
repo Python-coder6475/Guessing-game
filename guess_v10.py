@@ -10,7 +10,8 @@ range1 = 0
 window = tk.Tk()
 label = tk.label(text="Guessing Game")
 greeting.pack()
-button = tk.Button(text="Customized",x=-100,y=0)
+custom_button = tk.Button(text="Customized",x=-100,y=0)
+timed_button = tk.Button(text="Timed",x=100,y=0)
 window.mainloop()
 
 if mode == "customizable" or mode == "custom":
