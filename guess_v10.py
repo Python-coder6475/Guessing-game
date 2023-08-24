@@ -8,8 +8,9 @@ range2 = 0
 range1 = 0
 
 window = tk.Tk()
-window.tk.label(text="Guessing Game")
-window.pack()
+label = tk.label(text="Guessing Game")
+greeting.pack()
+button = tk.Button(text="Customized",x=-100,y=0)
 window.mainloop()
 
 if mode == "customizable" or mode == "custom":
