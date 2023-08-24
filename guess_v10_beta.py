@@ -20,7 +20,7 @@ custom_button.pack()
 timed_button.pack()
 window.mainloop()
 def custom():
-    if mode == "customizable" or mode == "custom":
+    if "custom" in mode:
         def game_input():
             global amount, range1, range2
             amount = int(input("How many guesses would you like?\n"))
