@@ -7,11 +7,17 @@ amount = 0
 range2 = 0
 range1 = 0
 
-window = tk.Tk()
-label = tk.label(text="Guessing Game")
-greeting.pack()
-custom_button = tk.Button(text="Customized",x=-100,y=0, command = custom)
-timed_button = tk.Button(text="Timed",x=100,y=0)
+window = tk.Tk(height=100, width=100)
+label = tk.label(text="Guessing Game", x=50, y=0)
+label2 = tk.Label(text="Pick your mode.", x=0, y = 0)
+label.pack()
+label2.pack()
+text = Text(Root)
+text.pack()
+custom_button = tk.Button(text="Customized",x=-100,y=-30, command = custom)
+timed_button = tk.Button(text="Timed",x=100,y=-30,command = timed)
+custom_button.pack()
+timed_button.pack()
 window.mainloop()
 def custom():
     if mode == "customizable" or mode == "custom":
@@ -75,5 +81,7 @@ def custom():
                 check_num()
                 print("Better luck next time!")
                 print("The number was ", rand2, ".")
-elif "time" in mode:
-    quit()
+def timed():
+    elif "time" in mode:
+        time_window = tk.TK()
+        time_label = tk.Label(text="""Timed mode not developed yet. Coming soon.""")
