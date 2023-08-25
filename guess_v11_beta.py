@@ -30,13 +30,10 @@ def custom():
                 result_label.config(text="Great guess! You got it!")
             elif abs(guess - target_number) == 1 or abs(guess - target_number) == 2:
                 result_label.config(text="So close! You almost had it!")
-                correct_number_label.config(text=f"The correct number was {target_number}")
             elif abs(guess - target_number) == 3 or abs(guess - target_number) == 4:
                 result_label.config(text="Close!")
-                correct_number_label.config(text=f"The correct number was {target_number}")
             elif abs(guess - target_number) >= 5:
                 result_label.config(text="Better luck next time!")
-                correct_number_label.config(text=f"The correct number was {target_number}")
         target_number = random.randint(range1, range2)
 
         guess_window = tk.Toplevel()
