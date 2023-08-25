@@ -36,16 +36,26 @@ def custom():
                 result_label.config(text="Better luck next time!")
         target_number = random.randint(range1, range2)
 
+        instruction_window = tk.TK()
+        instruction_window.geometry("300x250")
+        instruction_window.title("Instructions")
         guess_window = tk.Toplevel()
         guess_window.geometry("200x150")
         guess_window.title("Guess the Number")
 
+        instruction_label = tk.Label(instruction_window, text="""1. Put a guess in the text box.
+                                                                 2. Check your guess by pressing the check button.
+                                                                 3. Keep guessing until you get the number.
+                                                                 4. If you guess the number correctly it will change.
+                                                                 5. Repeat.
+                                                                 6. Have fun!""", wraplength=180)
         guess_label = tk.Label(guess_window, text="Guess a number:")
         guess_entry = tk.Entry(guess_window)
         check_button = tk.Button(guess_window, text="Check", command=check_guess)
         result_label = tk.Label(guess_window, text="", wraplength=180)
         correct_number_label = tk.Label(guess_window, text="", wraplength=180)
 
+        instruction_label.pack()
         guess_label.pack()
         guess_entry.pack()
         check_button.pack()
