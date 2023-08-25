@@ -1,85 +1,104 @@
 import random
 import tkinter as tk
 
-mode = input("Would you like a timed run or a customizable run?\n")
-mode = mode.lower()
-amount = 0
-range2 = 0
-range1 = 0
+def custom():
+    def game_input():
+        global amount, range1, range2
+        amount = int(amount_entry.get())
+        range1 = int(range1_entry.get())
+        range2 = int(range2_entry.get())
+        range_check()
 
-window = tk.Tk(height=100, width=100)
-label = tk.label(text="Guessing Game", x=50, y=0)
-label2 = tk.Label(text="Pick your mode.", x=0, y = 0)
+    def range_check():
+        if range1 > range2:
+            result_label.config(text="The bottom range is more than the top range. Please fix this.")
+        elif range2 < range1:
+            result_label.config(text="The top range is less than the bottom range. Please fix this.")
+        else:
+            result_label.config(text=f"The range is {range1} through {range2}. The amount of guesses is {amount}.")
+            play_game()
+
+    def play_game():
+        def check_guess():
+            guess = int(guess_entry.get())
+
+            if guess > range2:
+                result_label.config(text="Number is too high.")
+            elif guess < range1:
+                result_label.config(text="Number is too low.")
+            elif guess == target_number:
+                result_label.config(text="Great guess! You got it!")
+            elif abs(guess - target_number) == 1 or abs(guess - target_number) == 2:
+                result_label.config(text="So close! You almost had it!")
+                correct_number_label.config(text=f"The correct number was {target_number}")
+            elif abs(guess - target_number) == 3 or abs(guess - target_number) == 4:
+                result_label.config(text="Close!")
+                correct_number_label.config(text=f"The correct number was {target_number}")
+            elif abs(guess - target_number) >= 5:
+                result_label.config(text="Better luck next time!")
+                correct_number_label.config(text=f"The correct number was {target_number}")
+        target_number = random.randint(range1, range2)
+
+        guess_window = tk.Toplevel()
+        guess_window.geometry("200x150")
+        guess_window.title("Guess the Number")
+
+        guess_label = tk.Label(guess_window, text="Guess a number:")
+        guess_entry = tk.Entry(guess_window)
+        check_button = tk.Button(guess_window, text="Check", command=check_guess)
+        result_label = tk.Label(guess_window, text="", wraplength=180)
+        correct_number_label = tk.Label(guess_window, text="", wraplength=180)
+
+        guess_label.pack()
+        guess_entry.pack()
+        check_button.pack()
+        result_label.pack()
+        correct_number_label.pack()
+
+    custom_window = tk.Toplevel()
+    custom_window.geometry("300x200")
+    custom_window.title("Customized Mode")
+
+    amount_label = tk.Label(custom_window, text="Enter the number of guesses:")
+    amount_entry = tk.Entry(custom_window)
+    range1_label = tk.Label(custom_window, text="Enter the bottom range:")
+    range1_entry = tk.Entry(custom_window)
+    range2_label = tk.Label(custom_window, text="Enter the top range:")
+    range2_entry = tk.Entry(custom_window)
+    result_label = tk.Label(custom_window, text="", wraplength=250)
+
+    play_button = tk.Button(custom_window, text="Play", command=game_input)
+
+    amount_label.pack()
+    amount_entry.pack()
+    range1_label.pack()
+    range1_entry.pack()
+    range2_label.pack()
+    range2_entry.pack()
+    play_button.pack()
+    result_label.pack()
+
+def timed():
+    pass
+
+def start_custom():
+    window.withdraw()
+    custom()
+
+def start_timed():
+    window.withdraw()
+    timed()
+
+window = tk.Tk()
+window.geometry("200x150")
+window.title("Guessing Game")
+
+label = tk.Label(window, text="Guessing Game")
 label.pack()
-label2.pack()
-custom_button = tk.Button(text="Customized",x=-100,y=-30, command = custom)
-timed_button = tk.Button(text="Timed",x=100,y=-30,command = timed)
+
+custom_button = tk.Button(window, text="Customized", command=start_custom)
+timed_button = tk.Button(window, text="Timed", command=start_timed)
 custom_button.pack()
 timed_button.pack()
-window.mainloop()
-def custom():
-    if "custom" in mode:
-        def game_input():
-            global amount, range1, range2
-            amount = int(input("How many guesses would you like?\n"))
-            range1 = int(input("What is the bottom range of the numbers that can be chosen?\n"))
-            range2 = int(input("What is the top range of the numbers that can be chosen?\n"))
-        game_input()
 
-        def check():
-            try:
-                range1 = int(range1)
-                range2 = int(range2)
-            except ValueError:
-                print("Please input numbers.\n")
-                game_input()
-        def range_input():
-            global range1, range2
-            range1 = int(input("What is the bottom range of the numbers that can be chosen?\n"))
-            range2 = int(input("What is the top range of the numbers that can be chosen?\n"))
-            range_check()
-        def range_check():
-            if range1 > range2:
-                print("The bottom range is more than the top range. Please fix this.")
-                range_input()
-            elif range2 < range1:
-                print("The top range is less than the bottom range. Please fix this.")
-                range_input()
-            elif range2 == range1:
-                print("Both ranges  equal each other. Please fix this.")
-                range_input()
-        range_check()
-        print("The range is", range1, "through", range2, ". The amount of guesses is", amount, ".")
-        y = input("Please look over what you have inputted. If it is all correct type 'Y'\n")
-        if y == "Y":
-            for counter in range(amount):
-                print("Guess a number between", range1, "and", range2,".")
-                guess = input("What is your guess?\n")
-                guess = int(guess)
-                rand = random.randint(int(range1),int(range2))
-                rand = str(rand)
-                rand2 = rand.replace(" ", "", 100)
-                guess = str(guess)
-                guess2 = guess.replace(" ", "", 100)
-                guess2 = int(guess)
-                rand2 = int(rand2)
-                guess2 = float(guess2)
-                rand2 = float(rand2)
-            def check_num():
-                if guess2 > range2:
-                    print("Number is too high.")
-                elif guess2 < range1:
-                    print("Number is too low")
-                else:
-                    print("Great guess!")
-            if guess2 == rand2:
-                print("Great job!")
-                print("The number was ", rand2, "!")
-            else:
-                check_num()
-                print("Better luck next time!")
-                print("The number was ", rand2, ".")
-def timed():
-    elif "time" in mode:
-        time_window = tk.TK()
-        time_label = tk.Label(text="""Timed mode not developed yet. Coming soon.""")
+window.mainloop()
