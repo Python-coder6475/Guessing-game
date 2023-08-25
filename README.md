@@ -9,3 +9,4 @@ does not work correctly.
 New version coming out soon.
 
 Use guess_v10.py instead of guess_v11_beta.py as guess_v10.py works but is unpolished.
+guess_v11_beta.py is still in testing and may work.
